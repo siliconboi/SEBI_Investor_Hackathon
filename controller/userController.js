@@ -192,7 +192,7 @@ const verifyRegistrationPayload = asyncHandler(async (req, res) => {
   try {
     const registrationData = await server.verifyRegistration(registration, {
       challenge,
-      origin: "http://localhost:5000",
+      origin: "https://moneymanagerx.onrender.com",
     });
     res.json(registrationData);
   } catch (error) {
@@ -212,7 +212,7 @@ const verifyUserAuthentication = asyncHandler(async (req, res) => {
       const credential = user.verifyRegistrationData.credential;
       const expected = {
         challenge: challenge,
-        origin: "http://localhost:5000",
+        origin: "https://moneymanagerx.onrender.com",
         userVerified: true,
         counter: 0,
       };
