@@ -10,7 +10,8 @@ import {
     logoutUser,
     postActionInfo,
     generateOTP,
-    verifyOTP
+    verifyOTP,
+    getTransaction
 } from '../controller/userController.js';
 import isAuthenticated from "../middleware/authMiddleware.js"
 
@@ -49,6 +50,8 @@ userRoutes.post('/info', getUserInfo);
 
 //Post Action Info
 userRoutes.post('/chat', isAuthenticated, postActionInfo);
+
+userRoutes.get('/transactions', isAuthenticated, getTransaction);
 
 
 export { userRoutes };

@@ -43,6 +43,7 @@ const transactionSchema = mongoose.Schema(
     amount: { type: "Number", required: true },
     date: { type: "Date", required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    statement: { type: "String", required: true }
   },
   { timestaps: true }
 );

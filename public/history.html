@@ -26,19 +26,23 @@
         <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
 
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
+        <style type="text/css">
+            #app {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-
-        <style>
-            main.container {
-                max-width: 640px !important;
-                text-align: center;
+            #visualization {
+                width: 380px;
+                height: 380px;
             }
 
         </style>
+
     </head>
 
     <body>
@@ -54,10 +58,11 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto" target="_blank"
-                                href="https://recomsebi.streamlit.app/">Investment Recommendation</a></li>
+                                href="https://recomsebi.streamlit.app/">Investment Recommendation</a>
+                        </li>
                         <li><a class="nav-link scrollto" target="_blank"
                                 href="https://stockpredsebi.streamlit.app/">Stock Prediction</a></li>
-                        <li><a class="nav-link scrollto" href="/app">Account Overview</a></li>
+                        <li><a class="nav-link scrollto" href="/user">User Profile</a></li>
                         <li><a class="getstarted scrollto" href="/chat">Add New Record</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -74,75 +79,51 @@
 
                     <ol>
                         <li><a href="/">Home</a></li>
-                        <li>User Profile</li>
+                        <li>Account Overview</li>
                     </ol>
-                    <h2>User Profile</h2>
+                    <h2>Account Overview</h2>
 
                 </div>
             </section><!-- End Breadcrumbs -->
 
             <section class="inner-page">
-                <main id="user" class="section container">
-                    <p class="h2">User Profile</p>
-                    <div class="row d-flex justify-content-center align-items-center h-100">
-                        <div class="col col-lg-10 mb-4 mb-lg-0">
-                            <div class="card mb-3" style="border-radius: .5rem;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 gradient-custom text-center"
-                                        style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                            alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                                        <h5>{{user.res.user.name}}</h5>
-                                        <p><b>@</b>{{user.res.user.username}}</p>
-                                        <i class="far fa-edit mb-5"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body p-4">
-                                            <h6>Information</h6>
-                                            <hr class="mt-0 mb-4">
-                                            <div class="row pt-1">
-                                                <h6>Email</h6>
-                                                <p class="text-muted">{{user.res.user.email}}</p>
-                                            </div>
-                                            <h6>Account Overview</h6>
-                                            <hr class="mt-0 mb-4">
-                                            <div class="row pt-1">
-                                                <div class="col-6 mb-3">
-                                                    <h6>Income</h6>
-                                                    <p class="text-muted">{{user.res.user.Income}}</p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <h6>Expenses</h6>
-                                                    <p class="text-muted">{{user.res.user.Expenses}}</p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <h6>Investments</h6>
-                                                    <p class="text-muted">{{user.res.user.Investments}}</p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <h6>Savings</h6>
-                                                    <p class="text-muted">{{user.res.user.Savings}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-center">
-                                                <b-button type="is-primary" @click="/history">Transaction</b-button>
-                                            </div>
-                                            <div class="d-flex justify-content-center">
-                                                <b-button type="is-primary" @click="logout()">Logout</b-button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="container">
+                    <h1>Transaction Table</h1>
+                    <div id="app">
+
+                        <!-- User ID input (optional) -->
+                        <!-- <label for="userId">User ID:</label> -->
+                        <!-- <input type="text" id="userId" v-model="userId" placeholder="Enter User ID"> -->
+                        <!-- <button @click="fetchTransactions">Fetch Transactions</button> -->
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Statement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="transaction in transactions" :key="transaction._id">
+                                    <td>{{ transaction.type }}</td>
+                                    <td>{{ transaction.amount }}</td>
+                                    <td>{{ transaction.date }}</td>
+                                    <td>{{transaction.statement}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </main>
+                </div>
             </section>
 
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
         <footer id="footer">
+
+
             <div class="container footer-bottom clearfix">
                 <div class="copyright">
                     &copy; Copyright <strong><span>MoneyManagerX</span></strong>. All Rights Reserved
@@ -158,7 +139,6 @@
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
 
-        <!-- Vendor JS Files -->
         <script src="vendor/aos/aos.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="vendor/glightbox/js/glightbox.min.js"></script>
@@ -174,10 +154,10 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/vue-router@3.5.2/dist/vue-router.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-        <script type="module" src="js/user.js"></script>
-
+        <script type="module" src="js/history.js"></script>
     </body>
 
 </html>

@@ -60,7 +60,9 @@ app.get('/chat', isAuthenticated, function (req, res) {
     res.sendFile(join(publicDirPath, 'chat.html'));
 });
 // ...
-
+app.get('/history', isAuthenticated, function (req, res) {
+    res.sendFile(join(publicDirPath, 'history.html'));
+});
 
 app.use('/api', userRoutes);
 

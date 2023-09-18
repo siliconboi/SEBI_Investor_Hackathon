@@ -59,6 +59,18 @@ const getChallenge = (req, res) => {
   res.json({ challenge });
 };
 
+const getTransaction = asyncHandler(async (req, res) => {
+  const user = req.query.user; // Get the user ID from the query parameter
+  try {
+    const transactions = await Transaction.find();
+    // console.log(transactions)
+    res.json(transactions);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Checking if user is registered
 const checkIsRegistered = asyncHandler(async (req, res) => {
   const { username } = req.body;
@@ -199,6 +211,7 @@ const verifyRegistrationPayload = asyncHandler(async (req, res) => {
     const registrationData = await server.verifyRegistration(registration, {
       challenge,
       origin: "https://moneymanagerx.onrender.com",
+      // origin: "http://localhost:5000"
     });
     res.json(registrationData);
   } catch (error) {
@@ -219,6 +232,7 @@ const verifyUserAuthentication = asyncHandler(async (req, res) => {
       const expected = {
         challenge: challenge,
         origin: "https://moneymanagerx.onrender.com",
+        // origin: "http://localhost:5000",
         userVerified: true,
         counter: 0,
       };
@@ -283,4 +297,5 @@ export {
   registerNewUsers,
   logoutUser,
   postActionInfo,
+  getTransaction
 };
