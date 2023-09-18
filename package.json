@@ -1,5 +1,5 @@
 {
-  "name": "budgetbuddy",
+  "name": "MoneyManagerX",
   "version": "1.0.0",
   "description": "Finance tracker application that incorporates multifactor authentication with FIDO2, categorizes transactions in expense, savings, investment, or earning, and allows users to make investments",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rishitashaw/BudgetBuddy.git"
+    "url": "git+https://github.com/rishitashaw/MoneyManagerX.git"
   },
   "keywords": [
     "FIDO2",
@@ -21,9 +21,9 @@
   "author": "Rishita Shaw",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rishitashaw/BudgetBuddy/issues"
+    "url": "https://github.com/rishitashaw/MoneyManagerX/issues"
   },
-  "homepage": "https://github.com/rishitashaw/BudgetBuddy#readme",
+  "homepage": "https://github.com/rishitashaw/MoneyManagerX#readme",
   "dependencies": {
     "@passwordless-id/webauthn": "^1.2.4",
     "axios": "^1.4.0",
