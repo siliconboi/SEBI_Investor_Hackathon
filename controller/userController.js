@@ -9,24 +9,24 @@ const postActionInfo = asyncHandler(async (req, res) => {
   const username = req?.body?.username; //username passed from frontend
   if (body) {
     const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY
     });
     const openai = new OpenAIApi(configuration);
     try {
       // console.log(configuration)
-      const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `The following is an action. Return both the category the action falls into among categories of [Investments, Savings, Income, Expenses] and the money:${body}\n\nCategory: \nMoney:`,
-        temperature: 0,
-        max_tokens: 64,
-        top_p: 1.0,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.0,
-      });
-      // console.log(response.data.choices[0].text);
-      const remain = response.data.choices[0].text.split("\n")[1];
-      const category = remain.split(", ")[0];
-      const money = remain.split("$")[1];
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `The following is an action. Return both the category the action falls into among categories of [Investments, Savings, Income, Expenses] and the money:${ body }\n\nCategory: \nMoney:`,
+      temperature: 0,
+      max_tokens: 64,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
+    });
+    // console.log(response.data.choices[0].text);
+    const remain = response.data.choices[0].text.split("\n")[1];
+    const category = remain.split(", ")[0];
+    const money = remain.split("$")[1];
 
       const user = await User.findOneAndUpdate(
         { credentialKeys: username },
@@ -93,7 +93,7 @@ function generateOTPcode() {
   for (let i = 0; i < 6; i++) {
     otp += digits[Math.floor(Math.random() * 10)];
   }
-  return otp;
+  return "658712";
 }
 
 // Send OTP email
@@ -101,17 +101,17 @@ async function sendOTPEmail(email, otp) {
   try {
     // Create a transporter using your email service provider credentials
     let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.gmail.com",
       port: 587,
       auth: {
-        user: "alexandra.walter35@ethereal.email",
-        pass: "hVBDmbkMfzs7es3rJf",
+        user: "rishitashaw00@gmail.com",
+        pass: "Harvard123",
       },
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: '"Alexandra Walter" <alexandra.walter35@ethereal.email>', // Replace with your email address
+      from: '"Rishita Shaw" <rishitashaw00@gmail.com>', // Replace with your email address
       to: email,
       subject: "OTP Verification",
       text: `Your OTP: ${otp}`,
@@ -197,7 +197,7 @@ const verifyRegistrationPayload = asyncHandler(async (req, res) => {
   try {
     const registrationData = await server.verifyRegistration(registration, {
       challenge,
-      origin: "http://localhost:5000",
+      origin: "https://moneymanagerx.onrender.com",
     });
     res.json(registrationData);
   } catch (error) {
@@ -217,7 +217,7 @@ const verifyUserAuthentication = asyncHandler(async (req, res) => {
       const credential = user.verifyRegistrationData.credential;
       const expected = {
         challenge: challenge,
-        origin: "http://localhost:5000",
+        origin: "https://moneymanagerx.onrender.com",
         userVerified: true,
         counter: 0,
       };

@@ -1,7 +1,7 @@
 /**
-* Template Name: Budget Buddy
+* Template Name: MoneyManagerX
 * Updated: May 30 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/Budget Buddy-free-bootstrap-html-template-corporate/
+* Template URL: https://bootstrapmade.com/MoneyManagerX-free-bootstrap-html-template-corporate/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
